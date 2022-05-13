@@ -9,6 +9,13 @@
 
 //INCLUDE
 #include	"GameApp.h"
+#include    "Player.h"
+
+CCamera gCamera;
+CDirectionalLight gLight;
+CPlayer gPlayer;
+bool gbDebug = false;
+
 
 /*************************************************************************//*!
 		@brief			アプリケーションの初期化
@@ -20,6 +27,10 @@
 MofBool CGameApp::Initialize(void){
 	//リソース配置ディレクトリの設定
 	CUtilities::SetCurrentDirectory("Resource");
+	gCamera.SetViewPort();
+	gCamera.LookAt(Vector3(0, 6.0f, -17.0f), Vector3(0, 0, -10), Vector3(0, 1, 0));
+	gCamera.PerspectiveFov(MOF_ToRadian(60.0f), 1024.0f / 768.0f, 0.01f, 1000.0f);
+	CGraphicsUtilities::SetCamera(&gCamera);
 	
 	return TRUE;
 }
